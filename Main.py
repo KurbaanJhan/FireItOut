@@ -71,9 +71,9 @@ WIN.blit(tree_double, (100, 505))
 WIN.blit(tree_double, (1400, 505))
 WIN.blit(tree_double, (200, 505))
 
-
+pygame.display.update()
 while True:
-    pygame.display.update()
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
