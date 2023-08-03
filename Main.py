@@ -73,6 +73,7 @@ WIN.blit(tree_double, (200, 505))
 
 
 while True:
+    pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -91,5 +92,4 @@ while True:
     else:
         stikkrect = standing.get_rect(center=(xpos, ypos))
         WIN.blit(standing, stikkrect)
-    pygame.display.update()
     clok.tick(60)
