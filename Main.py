@@ -19,7 +19,18 @@ platform_4 = pygame.image.load("ground4.png")
 tree_bush = pygame.image.load("tree_bush.png")
 tree_double = pygame.image.load("tree_double.png")
 tree_pine_cone = pygame.image.load("tree_pine_cone.png")
-
+clok = pygame.time.Clock()
+player = pygame.Rect((300, 250, 50, 50))
+xpos, ypos = 400, 600
+jumping = False
+GRAV = 1
+JHEIGHT = 20
+YVELO = JHEIGHT
+standing = pygame.transform.scale(pygame.image.load("assets/stickman1.png"), (32, 32))
+jump = pygame.transform.scale(
+    pygame.image.load("assets/stickmanrunning2.png"), (32, 32)
+)
+stikkrect = standing.get_rect(center=(xpos, ypos))
 
 WIN.blit(sky, (0, 0))
 WIN.blit(ground, (0, 610))
@@ -60,9 +71,25 @@ WIN.blit(tree_double, (100, 505))
 WIN.blit(tree_double, (1400, 505))
 WIN.blit(tree_double, (200, 505))
 
-pygame.display.update()
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+    keyspress = pygame.key.get_pressed()
+    if keyspress[pygame.K_SPACE]:
+        jumping = True
+    if jumping:
+        ypos -= YVELO
+        YVELO -= GRAV
+        if YVELO < -JHEIGHT:
+            jumping = False
+            YVELO = JHEIGHT
+        stikkrect = jump.get_rect(center=(xpos, ypos))
+        WIN.blit(jump, stikkrect)
+    else:
+        stikkrect = standing.get_rect(center=(xpos, ypos))
+        WIN.blit(standing, stikkrect)
+    pygame.display.update()
+    clok.tick(60)
