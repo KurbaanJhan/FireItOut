@@ -13,12 +13,24 @@ standing = pygame.transform.scale(pygame.image.load("assets/stickman1.png"), (32
 jump = pygame.transform.scale(pygame.image.load("assets/stickmanrunning2.png"), (32, 32))
 
 #Initialize player values
-player = pygame.Rect((300, 250, 50, 50))
+clok = pygame.time.Clock()
 xpos, ypos = 400, 600
 jumping = False
+walking = 1
 GRAV = 1
 JHEIGHT = 20
 YVELO = JHEIGHT
+standing = pygame.transform.scale(pygame.image.load("assets/stickman1.png"), (32, 32))
+jump = pygame.transform.scale(
+    pygame.image.load("assets/stickmanrunning2.png"), (32, 32)
+)
+walk = pygame.transform.scale(
+    pygame.image.load("assets/stickmanrunning1.png"), (32, 32)
+)
+walk2 = pygame.transform.scale(
+    pygame.image.load("assets/stickmanInverted.png"), (32, 32)
+)
+stikkrect = standing.get_rect(center=(xpos, ypos))
 
 def main_game(screen):
     global xpos, ypos, YVELO, jumping
@@ -27,6 +39,30 @@ def main_game(screen):
 
     run = True
     while run:
+        keyspress = pygame.key.get_pressed()
+        if keyspress[pygame.K_SPACE]:
+        jumping = True
+        if jumping:
+            ypos -= YVELO
+            YVELO -= GRAV
+        if YVELO < -JHEIGHT:
+            jumping = False
+            YVELO = JHEIGHT
+        stikkrect = jump.get_rect(center=(xpos, ypos))
+        screen.blit(jump, stikkrect)
+        if keyspress[pygame.K_d]:
+            walking = 2
+            xpos += 1
+            stikkrect = walk.get_rect(center=(xpos, ypos))
+            screen.blit(walk, stikkrect)
+        if keyspress[pygame.K_a]:
+            walking = 4
+            xpos -= 1
+            stikkrect = walk2.get_rect(center=(xpos, ypos))
+            screen.blit(walk2, stikkrect)
+        elif walking == 1 or jumping == False:
+            stikkrect = standing.get_rect(center=(xpos, ypos))
+            screen.blit(standing, stikkrect)
         # handle every event since the last frame.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
