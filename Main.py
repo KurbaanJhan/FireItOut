@@ -13,7 +13,6 @@ standing = pygame.transform.scale(pygame.image.load("assets/stickman1.png"), (32
 jump = pygame.transform.scale(pygame.image.load("assets/stickmanrunning2.png"), (32, 32))
 
 #Initialize player values
-clok = pygame.time.Clock()
 xpos, ypos = 400, 600
 jumping = False
 walking = 1
