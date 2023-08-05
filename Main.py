@@ -32,7 +32,7 @@ walk2 = pygame.transform.scale(
 stikkrect = standing.get_rect(center=(xpos, ypos))
 
 def main_game(screen):
-    global xpos, ypos, YVELO, jumping
+    global xpos, ypos, YVELO, jumping, walking
 
     clock = pygame.time.Clock()  # create a clock object for timing
 
