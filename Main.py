@@ -40,7 +40,7 @@ def main_game(screen):
     while run:
         keyspress = pygame.key.get_pressed()
         if keyspress[pygame.K_SPACE]:
-        jumping = True
+            jumping = True
         if jumping:
             ypos -= YVELO
             YVELO -= GRAV
